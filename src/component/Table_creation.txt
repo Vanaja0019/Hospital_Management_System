@@ -1,0 +1,62 @@
+//Create a table from Postgres
+
+create table tbl_users(user_id int primary key ,
+role varchar(255) not null,
+email_id varchar(319),
+user_name varchar(255) not null,
+password varchar(100) not null);
+
+select * from tbl_users;
+select * from tbl_users where email_id='kothai19@gmail.com' and password='Kothai0019';
+
+
+create table tbl_patients_info(patient_id int primary key not null,
+user_id int,
+patient_name varchar(255) not null,
+patient_age int not null,
+patient_sex char(10) not null,
+patient_contact bigint not null,
+patient_address varchar(400),
+foreign key(user_id) references tbl_users(user_id)
+);
+
+create table tbl_doctors_info(doctor_id int primary key not null,
+user_id int,
+doctor_name varchar(255) not null,
+doctor_sex char(10) not null,
+doctor_contact bigint not null,
+doctor_specialization varchar(255),
+foreign key(user_id) references tbl_users(user_id)
+);
+
+
+create table tbl_doctors_patients_info(doctor_id int,patient_id int,appointment_date date,doctor_status varchar(255),
+patient_status varchar(255),foreign key(doctor_id) references tbl_doctors_info(doctor_id),
+foreign key(patient_id) references tbl_patients_info(patient_id));
+
+
+
+
+[
+  {
+    "user_id": 101,
+    "role": "Admin",
+    "email_id": "Kothai@gmail.com",
+    "user_name": "Kothai",
+    "password": "Kothai0019"
+  },
+  {
+    "user_id": 102,
+    "role": "Doctor",
+    "email_id": "Ashok@gmail.com",
+    "user_name": "Ashok",
+    "password": "Ashok0019"
+  },
+  {
+    "user_id": 103,
+    "role": "Patient",
+    "email_id": "Sankar@gmail.com",
+    "user_name": "Sankar",
+    "password": "Sankar0019"
+  }
+]
